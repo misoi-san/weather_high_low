@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <!-- セレクトメニュー -->
+  <form action="/get_japan_cities" method="post">
+    <div class="form-floating">
+      <select class="form-select" w-25 id="japan_cities" name="japan_cities">
+        <option selected>都市を選択してください</option>
+        <option value="Sapporo">北海道（札幌）</option>
+        <option value="Aomori">青森県（青森）</option>
+        <option value="Morioka">岩手県（盛岡）</option>
+        <option value="Sendai">宮城県（仙台）</option>
+        <option value="Akita">秋田県（秋田）</option>
+        <option value="Yamagata">山形県（山形）</option>
+        <option value="Fukushima">福島県（福島）</option>
+        <option value="Mito">茨城県（水戸）</option>
+        <option value="Utsunomiya">栃木県（宇都宮）</option>
+        <option value="Maebashi">群馬県（前橋）</option>
+        <option value="Saitama">埼玉県（さいたま）</option>
+        <option value="Chiba">千葉県（千葉）</option>
+        <option value="Tokyo">東京都（東京）</option>
+        <option value="Yokohama">神奈川県（横浜）</option>
+        <option value="Niigata">新潟県（新潟）</option>
+        <option value="Toyama">富山県（富山）</option>
+        <option value="Kanazawa">石川県（金沢）</option>
+        <option value="Fukui">福井県（福井）</option>
+        <option value="Nagano">長野県（長野）</option>
+        <option value="Gifu">岐阜県（岐阜）</option>
+        <option value="Shizuoka">静岡県（静岡）</option>
+        <option value="Nagoya">愛知県（名古屋）</option>
+        <option value="Kyoto">京都府（京都）</option>
+        <option value="Osaka">大阪府（大阪）</option>
+        <option value="Kobe">兵庫県（神戸）</option>
+        <option value="Nara">奈良県（奈良）</option>
+        <option value="Wakayama">和歌山県（和歌山）</option>
+        <option value="Tottori">鳥取県（鳥取）</option>
+        <option value="Shimane">島根県（松江）</option>
+        <option value="Okayama">岡山県（岡山）</option>
+        <option value="Hiroshima">広島県（広島）</option>
+        <option value="Yamaguchi">山口県（山口）</option>
+        <option value="Tokushima">徳島県（徳島）</option>
+        <option value="Takamatsu">香川県（高松）</option>
+        <option value="Matsuyama">愛媛県（松山）</option>
+        <option value="Kochi">高知県（高知）</option>
+        <option value="Fukuoka">福岡県（福岡）</option>
+        <option value="Saga">佐賀県（佐賀）</option>
+        <option value="Nagasaki">長崎県（長崎）</option>
+        <option value="Kumamoto">熊本県（熊本）</option>
+        <option value="Oita">大分県（大分）</option>
+        <option value="Miyazaki">宮崎県（宮崎）</option>
+        <option value="Kagoshima">鹿児島県（鹿児島）</option>
+        <option value="Naha">沖縄県（那覇）</option>
+      </select>
+      <label for="floatingSelectGrid">都市を選択</label>
+      <button type="submit" class="btn btn-outline-primary m-3">都市選択🗾</button>
+    </div>
+  </form>
+
+  <p>選択した都市名: {{ selected_city }}</p>
+  <p>選択した都市の気温: {{ selected_city_temp_c }}</p>
+  
+  <!-- ランダム都市選択ボタン -->
+  <form action="/get_random_cities" method="post">
+    <button type="submit" class="btn btn-outline-primary m-3" random_city>ランダム都市選択🎲</button>
+  </form>
+
+  <p>ランダム選択した都市名: {{ random_city }}</p>
+  <p>ランダム選択した都市の気温:</p>
+  {% if show %}
+  <p>{{ session['random_city_temp_c'] }}</p>
+  {% endif %} 
+  
+  <!-- ハイとローの選択ボタン -->
+  <div class="row">
+    <div class="col-1">
+      <form action="/guess_high" method="post">
+        <button type="submit" class="btn btn-outline-primary m-3">ハイ</button>
+      </form>
+    </div>
+      <div class="col-1">
+        <form action="/guess_low" method="post">
+          <button type="submit" class="btn btn-outline-primary m-3">ロー</button>
+        </form>
+      </div>
+  </div>
+  <p>結果：{{ result }}</p>
+</div>
+{% endblock %}
