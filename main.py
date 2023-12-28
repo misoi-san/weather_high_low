@@ -3,10 +3,16 @@ import random
 import requests
 from flask import Flask, render_template, request, session
 
+from dotenv import load_dotenv
+import os
+
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.secret_key = 'secret_key'
 
-api_key = "your_api_key"
+load_dotenv()
+api_key = os.getenv("API_KEY")
+print(api_key)
+
 base_url = "http://api.weatherapi.com/v1"
 
 world_cities = [
@@ -101,4 +107,4 @@ def guess_low():
     return "エラー: 必要なデータがありません"
 
 if __name__ == "__main__":
-  app.run(host='0.0.0.0', port=random.randint(2000, 9000))
+  app.run(host='localhost', port=(5000))
